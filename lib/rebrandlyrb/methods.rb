@@ -1,8 +1,8 @@
-
+require 'httparty'
 # @!attribute api_key
 # @!attribute domain_id
 # @!attribute domain_name
-# @!attribute team_id 
+# @!attribute team_id
 class Rebrandly
   include HTTParty
   base_uri 'api.rebrandly.com/v1'
