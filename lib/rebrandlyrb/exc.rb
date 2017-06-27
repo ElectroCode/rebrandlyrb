@@ -1,37 +1,43 @@
 module RebrandlyError
-  class Error > StandardError
-    def initialize(msg = 'An unknown Error occured')
+  class Error < StandardError
+    def initialize(msg = 'An unknown error occured')
       super
     end
-  class APIError > Error
+  class APIError < Error
   end
   # Invalid JSON Request
   # Code: 400
-  class BadRequestError > APIError
+  class BadRequestError < RebrandlyError.APIError
   end
   # Authorization credentials invalid
   # oAuth Token expired etc.
   # Code: 401
-  class NotAuthorizedError > APIError
+  class NotAuthorizedError < RebrandlyError.APIError
   end
   # Invalid input format
   # Missing body
   # Limits threshold reached
   # Code: 403
-  class InvalidFormatError > APIError
+  class InvalidFormatError < RebrandlyError.APIError
   end
   # Resource/Endpoint not found
   # Code: 404
-  class NotFoundError > APIError
+  class NotFoundError < RebrandlyError.APIError
   end
   # API Endpoint Server Error
   # Code: 500
-  class InternalServerError > APIError
+  class InternalServerError < RebrandlyError.APIError
   end
   # Failure in Rebrandly's upstream providers
   # Code: 502
-  class BadGatewayError > APIError
+  class BadGatewayError < RebrandlyError.APIError
   end
   # API endpoint under maintenance
   # Code: 503
-  class APIUnavailable > APIError
+  class APIUnavailableError < RebrandlyError.APIError
+  end
+  # API Operation Timeout
+  # Code: 504
+  class APITimeoutError < RebrandlyError.APIError
+  end
+end
