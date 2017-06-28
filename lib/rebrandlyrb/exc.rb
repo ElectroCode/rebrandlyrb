@@ -8,41 +8,41 @@ module RebrandlyError
   end
   # Invalid JSON Request
   # Code: 400
-  class BadRequestError < RebrandlyError.APIError
+  class BadRequestError < RebrandlyError::APIError
   end
   # Authorization credentials invalid
   # oAuth Token expired etc.
   # Code: 401
-  class NotAuthorizedError < RebrandlyError.APIError
+  class NotAuthorizedError < RebrandlyError::APIError
   end
   # Link etc. Already Exists
   # Code: 403
-  class AlreadyExistsError < RebrandlyError.APIError
+  class AlreadyExistsError < RebrandlyError::APIError
   end
   # Invalid input format
   # Missing body
   # Limits threshold reached
   # Code: 403
-  class InvalidFormatError < RebrandlyError.APIError
+  class InvalidFormatError < RebrandlyError::APIError
   end
   # Resource/Endpoint not found
   # Code: 404
-  class NotFoundError < RebrandlyError.APIError
+  class NotFoundError < RebrandlyError::APIError
   end
   # API Endpoint Server Error
   # Code: 500
-  class InternalServerError < RebrandlyError.APIError
+  class InternalServerError < RebrandlyError::APIError
   end
   # Failure in Rebrandly's upstream providers
   # Code: 502
-  class BadGatewayError < RebrandlyError.APIError
+  class BadGatewayError < RebrandlyError::APIError
   end
   # API endpoint under maintenance
   # Code: 503
-  class APIUnavailableError < RebrandlyError.APIError
+  class APIUnavailableError < RebrandlyError::APIError
   end
   # API Operation Timeout
   # Code: 504
-  class APITimeoutError < RebrandlyError.APIError
+  class APITimeoutError < RebrandlyError::APIError
   end
 end
