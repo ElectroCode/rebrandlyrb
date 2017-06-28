@@ -3,6 +3,7 @@ module RebrandlyError
     def initialize(msg = 'An unknown error occured')
       super
     end
+  end
   class APIError < Error
   end
   # Invalid JSON Request
