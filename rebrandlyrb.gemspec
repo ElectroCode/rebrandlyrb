@@ -1,5 +1,6 @@
 # coding: utf-8
-require './lib/rebrandlyrb/version'
+$LOAD_PATH.push File.expand_path("../lib", __FILE__)
+require 'rebrandlyrb/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'rebrandlyrb'
@@ -21,9 +22,12 @@ Gem::Specification.new do |spec|
       'public gem pushes.'
   end
 
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features)/})
-  end
+  all_files = `git ls-files`.split("\n")
+  test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
+
+  spec.files         = all_files - test_files
+  spec.test_files    = test_files
+
   spec.require_paths = ['lib/']
 
   spec.add_development_dependency 'bundler', '~> 1.15'
