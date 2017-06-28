@@ -14,6 +14,7 @@ class RebrandlyResponse
         raise RebrandlyError::AlreadyExistsError rebrandly_response.message
       else
         raise RebrandlyError::InvalidFormatError rebrandly_response.message
+      end
     when 404
       raise RebrandlyError::NotFoundError rebrandly_response.message
     when 500

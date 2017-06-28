@@ -16,7 +16,7 @@ module Rebrandly
     end
 
     headers('Content-Type' => 'application/json')
-    unless team.nil
+    unless team.nil?
       headers << team
     end
     def initialize
@@ -115,7 +115,7 @@ module Rebrandly
           response = self.class.delete("/#{id}")
         else
           if options.keys == ['trash']
-            if options['trash'] ~= /(true|false)/
+            if options['trash'] =~ /(true|false)/
               response = self.class.delete("/#{id}", options)
             else
               raise RebrandlyAPIError "Rebrandly#delete supports one key only, 'trash', which is a boolean"
@@ -179,8 +179,6 @@ module Rebrandly
     def get(options = nil)
       begin
           response = self.class.get('/')
-          case response.code
-          when 
       rescue HTTParty::Error => e
         raise HTTParty "HTTParty encountered an error. Details: #{e}"
       end
