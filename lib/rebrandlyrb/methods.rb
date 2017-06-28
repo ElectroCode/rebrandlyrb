@@ -1,5 +1,6 @@
 require 'httparty'
 require 'rebrandlyrb/exc'
+require 'rebrandlyrb/rebrandly_response'
 # @!attribute api_key
 # @!attribute domain_id
 # @!attribute domain_name
@@ -51,7 +52,9 @@ module Rebrandly
     #         with left and right square brackets respectively. 
     def list(options = nil)
       if options.nil?
-        response = self.class.get('/', options)
+        rebrandly_response = self.class.get('/', options)
+        http_response = rebrandly_response
+        #RebrandlyResponse.raise_exception(http_response, rebrandly_response)
       end
     end
     # @param [String] id Link ID

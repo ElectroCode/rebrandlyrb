@@ -1,23 +1,29 @@
 require 'rebrandlyrb/exc'
 class RebrandlyResponse
-  def RebrandlyResponse.get_code(response)
+  def RebrandlyResponse.raise_exception(http_response, rebrandly_response)
+    code = http_response.code
     case code
+    when 200
+      # Everything went well, continue.
     when 400
-      raise RebrandlyError::BadRequestError response.message
+      raise RebrandlyError::BadRequestError rebrandly_response.message
     when 401
-      raise RebrandlyError::NotAuthorizedError response.message
+      raise RebrandlyError::NotAuthorizedError rebrandly_response.message
     when 403
-      raise RebrandlyError::InvalidFormatError response.message
+      if rebrandly_response.code == 'AlreadyExists'
+        raise RebrandlyError::AlreadyExistsError rebrandly_response.message
+      else
+        raise RebrandlyError::InvalidFormatError rebrandly_response.message
     when 404
-      raise RebrandlyError::NotFoundError response.message
+      raise RebrandlyError::NotFoundError rebrandly_response.message
     when 500
-      raise RebrandlyError::InternalServerError response.message
+      raise RebrandlyError::InternalServerError rebrandly_response.message
     when 502
-      raise RebrandlyError::BadGatewayError response.message
+      raise RebrandlyError::BadGatewayError rebrandly_response.message
     when 503
-      raise RebrandlyError::APIUnavailableError response.message
+      raise RebrandlyError::APIUnavailableError rebrandly_response.message
     when 504
-      raise RebrandlyError::APITimeoutError response.message
+      raise RebrandlyError::APITimeoutError rebrandly_response.message
     end
   end
 end

@@ -14,6 +14,10 @@ module RebrandlyError
   # Code: 401
   class NotAuthorizedError < RebrandlyError.APIError
   end
+  # Link etc. Already Exists
+  # Code: 403
+  class AlreadyExistsError < RebrandlyError.APIError
+  end
   # Invalid input format
   # Missing body
   # Limits threshold reached
