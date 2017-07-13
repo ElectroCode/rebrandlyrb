@@ -18,8 +18,7 @@ Gem::Specification.new do |spec|
   if spec.respond_to?(:metadata)
     spec.metadata['allowed_push_host'] = 'TODO: Set to http://mygemserver.com'
   else
-    raise 'RubyGems 2.0 or newer is required to protect against ' \
-      'public gem pushes.'
+    raise 'RubyGems 2.0 or newer is required to protect against public gem pushes.'
   end
 
   all_files = `git ls-files`.split("\n")
@@ -28,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.files         = all_files - test_files
   spec.test_files    = test_files
 
-  spec.require_paths = ['lib/']
+  spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 1.15'
   spec.add_development_dependency 'rake', '~> 10.0'

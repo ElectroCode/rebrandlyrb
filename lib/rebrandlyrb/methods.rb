@@ -19,10 +19,11 @@ module Rebrandly
     unless team.nil?
       headers << team
     end
+
     def initialize
       @domain = {
-        fullName: @domain_name,
-        id: @domain_id
+          fullName: @domain_name,
+          id: @domain_id
       }
 
       if @team_id
@@ -30,6 +31,7 @@ module Rebrandly
       else
       end
     end
+
     # @option option [Hash] nil A hash of options to list links
     # @overload list(options = nil)
     #   @note There are certain options allowed for sorting filtering
@@ -52,48 +54,52 @@ module Rebrandly
     #         with left and right square brackets respectively. 
     def list(options = nil)
       if options.nil?
-        rebrandly_response = self.class.get('/', options)
-        http_response = rebrandly_response
+        rebrandly_self.class.get('/', options)
+        http_rebrandly_response
         #RebrandlyResponse.raise_exception(http_response, rebrandly_response)
       end
     end
+
     # @param [String] id Link ID
     # @option options [Hash] nil A hash of options to filter by
     def get(id = nil, options = nil)
       if id.nil?
         if options.nil?
-          response = self.class.get("/#{id}")
+          self.class.get("/#{id}")
         else
-          response = self.class.get("/#{id}", options)
+          self.class.get("/#{id}", options)
         end
       end
 
     end
+
     def count(options = nil)
       if options.nil?
-        response = self.class.get("/count")
+        self.class.get("/count")
       else
-        response = self.class.get('/count', options)
+        self.class.get('/count', options)
       end
     end
+
     # @param [Symbol] method POST or GET method
     # @option options [Hash] nil A Hash of options to filter by
     def new(method = nil, options = nil)
       case method
         when :get
           if options.nil?
-            response = self.class.get('/new')
+            self.class.get('/new')
           else
-            response = self.class.get('/new', options)
+            self.class.get('/new', options)
           end
         when :post
           if options.nil?
-            response = self.class.get('/')
+            self.class.get('/')
           else
-            response = self.class.get('/', options)
+            self.class.get('/', options)
           end
       end
     end
+
     # @param [String] id link id to update
     # @option options [Hash] nil A Hash of the fields to update, all required
     # but not necessarily different than their values
@@ -101,9 +107,10 @@ module Rebrandly
       if options.nil?
         raise RebrandlyAPIError "Rebrandly#update must be used with options."
       else
-        response = self.class.post("/#{id}", options)
+        self.class.post("/#{id}", options)
       end
     end
+
     # @param [String] id link id to delete
     # @option options [Hash] nil An optional Hash containing the key 'trash'
     # that declares whether to trash the link or to delete it permanently.
@@ -112,11 +119,11 @@ module Rebrandly
         raise RebrandlyAPIError "No ID to delete"
       else
         if options.nil?
-          response = self.class.delete("/#{id}")
+          self.class.delete("/#{id}")
         else
           if options.keys == ['trash']
             if options['trash'] =~ /(true|false)/
-              response = self.class.delete("/#{id}", options)
+              self.class.delete("/#{id}", options)
             else
               raise RebrandlyAPIError "Rebrandly#delete supports one key only, 'trash', which is a boolean"
             end
@@ -147,17 +154,19 @@ module Rebrandly
     #   limit: optional integer -- limit to N domains
     def list(options = nil)
       if options.nil?
-        response = self.class.get('/')
+        self.class.get('/')
       else
-        response = self.class.get('/', options)
+        self.class.get('/', options)
       end
     end
+
     # @param [String] id domain id
     # @option options [Hash] nil An optional Hash containing filter
     def get(id = nil)
-        response = self.class.get("/#{id}")
+      self.class.get("/#{id}")
     end
-    # @option options [Hash] nil 
+
+    # @option options [Hash] nil
     # @overload count(options = nil)
     #  Options:
     #
@@ -166,9 +175,9 @@ module Rebrandly
     #    type: user/service
     def count(options = nil)
       if options.nil?
-        response = self.class.get("/count")
+        self.class.get("/count")
       else
-        response = self.class.get("/count", options)
+        self.class.get("/count", options)
       end
     end
   end
@@ -178,16 +187,17 @@ module Rebrandly
     # @option options [Hash]
     def get(options = nil)
       begin
-          response = self.class.get('/')
+        self.class.get('/')
       rescue HTTParty::Error => e
         raise HTTParty "HTTParty encountered an error. Details: #{e}"
       end
     end
+
     def teams(options = nil)
       if options.nil?
-        response = self.class.get("/teams/")
+        self.class.get("/teams/")
       else
-        response = self.class.get("/teams/", options)
+        self.class.get("/teams/", options)
       end
     end
   end
