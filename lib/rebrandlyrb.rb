@@ -1,5 +1,4 @@
-require "rebrandlyrb/version"
-
-module Rebrandlyrb
-  # Your code goes here...
-end
+require 'rebrandlyrb/exc'
+require 'rebrandlyrb/methods'
+require 'rebrandlyrb/rebrandly_response'
+require 'rebrandlyrb/version'
